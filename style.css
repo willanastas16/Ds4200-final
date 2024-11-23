@@ -64,18 +64,20 @@ main {
     margin: 0 0 20px;
 }
 
-.intro button {
-    padding: 10px 20px;
-    background-color: #ff0000;
+.button {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #f55a81; /* Pink button */
     color: white;
-    border: none;
+    text-decoration: none;
     border-radius: 5px;
-    cursor: pointer;
-    font-weight: 700;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
 }
 
-.intro button:hover {
-    background-color: #cc0000;
+.button:hover {
+    background-color: #cc0000; /* Darker pink on hover */
 }
 
 .social-icons {
@@ -97,6 +99,7 @@ main {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    max-width: 50%;
 }
 
 .visualization h3 {
@@ -106,7 +109,9 @@ main {
 }
 
 .visualization img {
-    max-width: 100%;
-    height: auto;
+    max-width: 80%; /* Reduce image size to 80% of its container */
+    height: auto; /* Maintain aspect ratio */
     border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Add spacing above the image */
 }
