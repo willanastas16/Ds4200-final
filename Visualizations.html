@@ -105,7 +105,7 @@
     <main>
         <section class="gallery">
             <div class="gallery-container">
-                <!-- Old Visualizations -->
+                <!-- Static Visualizations -->
                 <div class="gallery-item">
                     <img src="means-freq.png" alt="Visualization 1">
                     <p>Means of Control Frequency: Count vs. Means of Control</p>
@@ -136,7 +136,7 @@
                     <p>Means of Control Violin Plot: Means of Control vs. Percentages</p>
                 </div>
 
-                <!-- New Interactive Visualizations -->
+                <!-- Interactive Visualizations -->
                 <div class="gallery-item">
                     <div id="map"></div>
                     <p>Interactive Map: Clickable Country Data</p>
@@ -166,31 +166,29 @@
     <script>
         (function(vegaEmbed) {
             var spec = {
-                "config": {"view": {"continuousWidth": 300, "continuousHeight": 300}},
-                "data": {"name": "data-72f202ffa5ce6cafea3324ac66f8f270"},
-                "mark": {"type": "line", "point": true},
-                "encoding": {
-                    "color": {"field": "gender", "legend": null, "type": "nominal"},
-                    "tooltip": [
-                        {"field": "yearOfRegistration", "type": "ordinal"},
-                        {"field": "gender", "type": "nominal"},
-                        {"field": "count", "type": "quantitative"}
-                    ],
-                    "x": {"field": "yearOfRegistration", "title": "Year of Registration", "type": "ordinal"},
-                    "y": {"field": "count", "title": "Number of Trafficking Incidents", "type": "quantitative"}
-                },
-                "height": 400,
-                "title": "Trafficking Incidents by Gender and Year",
-                "datasets": {
-                    "data-72f202ffa5ce6cafea3324ac66f8f270": [
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": {
+                    "values": [
                         {"yearOfRegistration": 2002, "gender": "Female", "count": 1154},
                         {"yearOfRegistration": 2003, "gender": "Male", "count": 15}
                         // Add the full dataset as needed
                     ]
-                }
+                },
+                "mark": {"type": "line", "point": true},
+                "encoding": {
+                    "x": {"field": "yearOfRegistration", "type": "ordinal", "title": "Year of Registration"},
+                    "y": {"field": "count", "type": "quantitative", "title": "Number of Trafficking Incidents"},
+                    "color": {"field": "gender", "type": "nominal"},
+                    "tooltip": [
+                        {"field": "yearOfRegistration", "type": "ordinal"},
+                        {"field": "gender", "type": "nominal"},
+                        {"field": "count", "type": "quantitative"}
+                    ]
+                },
+                "height": 400,
+                "title": "Trafficking Incidents by Gender and Year"
             };
-            var embedOpt = {"mode": "vega-lite"};
-            vegaEmbed("#vis", spec, embedOpt).catch(console.error);
+            vegaEmbed("#vis", spec).catch(console.error);
         })(vegaEmbed);
     </script>
 </body>
