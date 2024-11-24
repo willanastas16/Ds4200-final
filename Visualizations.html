@@ -20,7 +20,7 @@
 
         nav {
             display: flex;
-            justify-content: right;
+            justify-content: flex-end;
             gap: 20px;
         }
 
@@ -53,18 +53,26 @@
             background: white;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
 
         .gallery-item img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
+            margin-bottom: 10px;
         }
 
-        .gallery-item p {
-            font-size: 18px;
-            margin-top: 10px;
-            color: #555;
+        .gallery-item iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 8px;
         }
 
         footer {
@@ -90,21 +98,38 @@
             <div class="gallery-container">
                 <!-- Static Visualizations -->
                 <div class="gallery-item">
-                    <img src="means-freq.png" alt="Visualization 1">
+                    <img src="means-freq.png" alt="Means of Control Frequency">
                     <p>Means of Control Frequency: Count vs. Means of Control</p>
                 </div>
-
-                <!-- Links to Interactive Visualizations -->
                 <div class="gallery-item">
-                    <a href="interactive_map_with_clickable_values.html">
-                        <p>Interactive Map: Clickable Country Data</p>
-                    </a>
+                    <img src="status-icu.png" alt="Percentage of ICU Admissions">
+                    <p>Percentage of ICU Admissions: Status vs. Percentage</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="traffic-gender-year.png" alt="Trafficking Incidents by Year">
+                    <p>Trafficking Incidents: Years vs. # of Incidents w/ Global Economic Crises and Awareness Campaigns</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="traffic-year.png" alt="Trafficking Incidents by Year">
+                    <p>Trafficking Incidents: Years vs. # of Incidents</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="type-gender.png" alt="Exploitation Type by Gender">
+                    <p>Exploitation Type by Gender: Exploitation Type vs. Percentage</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="violin-control.png" alt="Means of Control Violin Plot">
+                    <p>Means of Control Violin Plot: Means of Control vs. Percentages</p>
                 </div>
 
+                <!-- Embedded Interactive Visualizations -->
                 <div class="gallery-item">
-                    <a href="interactive_trafficking_incidents_by_gender.html">
-                        <p>Trafficking Incidents by Gender and Year</p>
-                    </a>
+                    <iframe src="interactive_map_with_clickable_values.html"></iframe>
+                    <p>Interactive Map: Clickable Country Data</p>
+                </div>
+                <div class="gallery-item">
+                    <iframe src="interactive_trafficking_incidents_by_gender.html"></iframe>
+                    <p>Trafficking Incidents by Gender and Year</p>
                 </div>
             </div>
         </section>
