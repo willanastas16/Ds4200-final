@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualizations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <style>
         body {
             font-family: 'Times New Roman', serif;
@@ -20,7 +25,7 @@
 
         nav {
             display: flex;
-            justify-content: center;
+            justify-content: right;
             gap: 20px;
         }
 
@@ -42,7 +47,7 @@
 
         .gallery-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); /* Larger visualization blocks */
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
             gap: 30px;
         }
 
@@ -62,9 +67,21 @@
         }
 
         .gallery-item p {
-            font-size: 18px; /* Larger caption text */
+            font-size: 18px;
             margin-top: 10px;
             color: #555;
+        }
+
+        #map {
+            height: 500px;
+            border: 1px solid #ddd;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        #vis {
+            width: 100%;
+            height: 400px;
         }
 
         footer {
@@ -88,40 +105,46 @@
     <main>
         <section class="gallery">
             <div class="gallery-container">
-                <!-- Gallery Item 1 -->
+                <!-- Old Visualizations -->
                 <div class="gallery-item">
                     <img src="means-freq.png" alt="Visualization 1">
-                    <p>Visualization 1: Caption describing the image.</p>
+                    <p>Means of Control Frequency: Count vs. Means of Control</p>
                 </div>
 
-                <!-- Gallery Item 2 -->
                 <div class="gallery-item">
                     <img src="status-icu.png" alt="Visualization 2">
-                    <p>Visualization 2: Caption describing the image.</p>
+                    <p>Percentage of ICU Admissions: Status vs. Percentage</p>
                 </div>
 
-                <!-- Gallery Item 3 -->
                 <div class="gallery-item">
                     <img src="traffic-gender-year.png" alt="Visualization 3">
-                    <p>Visualization 3: Caption describing the image.</p>
+                    <p>Trafficking Incidents: Years vs. # of Incidents w/ Global Economic Crises and Awareness Campaigns</p>
                 </div>
 
-                <!-- Gallery Item 4 -->
                 <div class="gallery-item">
                     <img src="traffic-year.png" alt="Visualization 4">
-                    <p>Visualization 4: Caption describing the image.</p>
+                    <p>Trafficking Incidents: Years vs. # of Incidents.</p>
                 </div>
 
-                <!-- Gallery Item 5 -->
                 <div class="gallery-item">
                     <img src="type-gender.png" alt="Visualization 5">
-                    <p>Visualization 5: Caption describing the image.</p>
+                    <p>Exploitation Type by Gender: Exploitation Type vs. Percentage</p>
                 </div>
 
-                <!-- Gallery Item 6 -->
                 <div class="gallery-item">
                     <img src="violin-control.png" alt="Visualization 6">
-                    <p>Visualization 6: Caption describing the image.</p>
+                    <p>Means of Control Violin Plot: Means of Control vs. Percentages</p>
+                </div>
+
+                <!-- New Interactive Visualizations -->
+                <div class="gallery-item">
+                    <div id="map"></div>
+                    <p>Interactive Map: Clickable Country Data</p>
+                </div>
+
+                <div class="gallery-item">
+                    <div id="vis"></div>
+                    <p>Trafficking Incidents by Gender and Year</p>
                 </div>
             </div>
         </section>
@@ -130,5 +153,45 @@
     <footer>
         <p>&copy; 2024 DS4200 Final Project | Group: William, Evelyn, Desiree</p>
     </footer>
+
+    <!-- Leaflet Map Script -->
+    <script>
+        var map = L.map('map').setView([20.0, 0.0], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    </script>
+
+    <!-- Vega Visualization Script -->
+    <script>
+        (function(vegaEmbed) {
+            var spec = {
+                "config": {"view": {"continuousWidth": 300, "continuousHeight": 300}},
+                "data": {"name": "data-72f202ffa5ce6cafea3324ac66f8f270"},
+                "mark": {"type": "line", "point": true},
+                "encoding": {
+                    "color": {"field": "gender", "legend": null, "type": "nominal"},
+                    "tooltip": [
+                        {"field": "yearOfRegistration", "type": "ordinal"},
+                        {"field": "gender", "type": "nominal"},
+                        {"field": "count", "type": "quantitative"}
+                    ],
+                    "x": {"field": "yearOfRegistration", "title": "Year of Registration", "type": "ordinal"},
+                    "y": {"field": "count", "title": "Number of Trafficking Incidents", "type": "quantitative"}
+                },
+                "height": 400,
+                "title": "Trafficking Incidents by Gender and Year",
+                "datasets": {
+                    "data-72f202ffa5ce6cafea3324ac66f8f270": [
+                        {"yearOfRegistration": 2002, "gender": "Female", "count": 1154},
+                        {"yearOfRegistration": 2003, "gender": "Male", "count": 15}
+                        // Add the full dataset as needed
+                    ]
+                }
+            };
+            var embedOpt = {"mode": "vega-lite"};
+            vegaEmbed("#vis", spec, embedOpt).catch(console.error);
+        })(vegaEmbed);
+    </script>
 </body>
 </html>
