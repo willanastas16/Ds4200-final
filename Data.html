@@ -48,7 +48,7 @@
         }
 
         .intro h1 {
-            font-size: 42px; /* Larger main title */
+            font-size: 30px; /* Larger main title */
             font-weight: bold;
             margin-bottom: 20px;
             line-height: 1.2;
@@ -62,7 +62,7 @@
         }
 
         .intro p {
-            font-size: 14px; /* Larger paragraph text */
+            font-size: 8px; /* Larger paragraph text */
             line-height: 1.8;
             margin-bottom: 20px;
             color: #333;
@@ -117,15 +117,12 @@
             <ul>
                 <li><strong>Data Cleaning Methods: Eliminating Excess Columns</strong>
                     <ul>
-                        <li>Original Data:</li>
-                        <li>64 columns.</li>
-                        <li>Ran into the issue of having too many types of exploitation, means of control columns</li>
-                        <li>Vast majority of the columns were binary, with 0 if not present, 1 if present.</li>
-                        <li>Made it harder to iterate through the dataset.</li>
+                        <li>Original Data: 64 columns.</li>
+                        <li>Ran into the issue of having too many types of exploitation, means of control columns.</li>
+                        <li>Vast majority of the columns were binary, with 0 if not present, 1 if present, which made it harder to iterate through the dataset.</li>
                         <li>Means of Control and Type of Exploitation both have “Concatenated” value columns where a general category is given. 
                             Used these columns to put these categories into groups based on specific qualities.</li>
-                        <li>Each category placed into a group with similar types of exploitation/means of control.</li>
-                        <li>Gives new columns based on the existing concatenated columns, with the new values being the assigned categories. 
+                        <li>Each category placed into a group with similar types of exploitation/means of control. Gives new columns based on the existing concatenated columns, with the new values being the assigned categories. 
                         </li>
                         <li>The new columns give us one concrete column for both of these important areas that can be used to determine which types of exploitation/means of control are most prevalent. 
                         </li>
@@ -140,22 +137,22 @@
 
                         <li>
                             In the original data, we ran into issues with plotting the age of trafficking victims because they were listed in ranges, rather than as concrete numeric values (ex: 00–08, rather than the victim’s actual age).
-                        </li>
-                        <li>
                             Ages were listed out of order due to this issue. 
 
                         </li>
                         <li>
                             To fix this issue, midpoints for each range were created, and a new column was made to store these values. 
-                        </li>
-                        <li>
-                            Allows for ages to be listed in order to make it easier to understand what age groups are most at risk. 
+                            This allowed for ages to be listed in order to make it easier to understand what age groups are most at risk. 
                         </li>
 
 
                     </ul>
                 </li>
             </ul>
+            <div class="gallery-item">
+                <img src="cleaned age data.png" alt="Means of Control Violin Plot">
+                <p>Means of Control Violin Plot: Means of Control vs. Percentages</p>
+            </div>
         </section>
     </main>
 
