@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        {%metas%}
-        <title>{%title%}</title>
-        {%favicon%}
-        {%css%}
-    </head>
-    <body>
-        <!--[if IE]><script>
-        alert("Dash v2.7+ does not support Internet Explorer. Please use a newer browser.");
-        </script><![endif]-->
-        {%app_entry%}
-        <footer>
-            {%config%}
-            {%scripts%}
-            {%renderer%}
-        </footer>
-    </body>
+<head>
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5.8.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "vconcat": [{"mark": {"type": "bar"}, "encoding": {"color": {"field": "gender", "title": "Gender", "type": "nominal"}, "tooltip": [{"field": "exploitation_type", "type": "ordinal"}, {"field": "gender", "type": "nominal"}, {"field": "proportion", "type": "quantitative"}], "x": {"field": "proportion", "stack": "normalize", "title": "Proportion", "type": "quantitative"}, "y": {"field": "gender", "title": "Gender", "type": "nominal"}}, "height": 400, "name": "view_5", "title": "Stacked Bar Chart of Exploitation Types by Gender", "width": 700}, {"mark": {"type": "bar"}, "encoding": {"color": {"field": "gender", "title": "Gender", "type": "nominal"}, "tooltip": [{"field": "gender", "type": "nominal"}, {"field": "proportion", "type": "quantitative"}], "x": {"field": "gender", "title": "Gender", "type": "nominal"}, "y": {"field": "proportion", "title": "Proportion", "type": "quantitative"}}, "height": 300, "name": "view_6", "title": "Gender Breakdown for Selected Category", "transform": [{"filter": {"param": "param_5"}}], "width": 700}], "data": {"name": "data-ac7004295902684761770b68dc06e89e"}, "params": [{"name": "param_5", "select": {"type": "point", "fields": ["exploitation_type"]}, "bind": {"input": "select", "options": ["Combination of Exploitation Types", "Forced Labour", "Forced Marriage", "Other", "Sexual Exploitation", "Slavery and Similar Practices", "Unspecified"], "name": "Select Category: "}, "views": ["view_5", "view_6"]}], "$schema": "https://vega.github.io/schema/vega-lite/v5.8.0.json", "datasets": {"data-ac7004295902684761770b68dc06e89e": [{"exploitation_type": "Combination of Exploitation Types", "gender": "index", "proportion": 0.0}, {"exploitation_type": "Forced Labour", "gender": "index", "proportion": 1.0}, {"exploitation_type": "Forced Marriage", "gender": "index", "proportion": 2.0}, {"exploitation_type": "Other", "gender": "index", "proportion": 3.0}, {"exploitation_type": "Sexual Exploitation", "gender": "index", "proportion": 4.0}, {"exploitation_type": "Slavery and Similar Practices", "gender": "index", "proportion": 5.0}, {"exploitation_type": "Unspecified", "gender": "index", "proportion": 6.0}, {"exploitation_type": "Combination of Exploitation Types", "gender": "Female", "proportion": 0.973743}, {"exploitation_type": "Forced Labour", "gender": "Female", "proportion": 0.423204}, {"exploitation_type": "Forced Marriage", "gender": "Female", "proportion": 1.0}, {"exploitation_type": "Other", "gender": "Female", "proportion": 0.68718}, {"exploitation_type": "Sexual Exploitation", "gender": "Female", "proportion": 0.955554}, {"exploitation_type": "Slavery and Similar Practices", "gender": "Female", "proportion": 0.797403}, {"exploitation_type": "Unspecified", "gender": "Female", "proportion": 0.602732}, {"exploitation_type": "Combination of Exploitation Types", "gender": "Male", "proportion": 0.026257}, {"exploitation_type": "Forced Labour", "gender": "Male", "proportion": 0.576796}, {"exploitation_type": "Forced Marriage", "gender": "Male", "proportion": 0.0}, {"exploitation_type": "Other", "gender": "Male", "proportion": 0.31282}, {"exploitation_type": "Sexual Exploitation", "gender": "Male", "proportion": 0.042899}, {"exploitation_type": "Slavery and Similar Practices", "gender": "Male", "proportion": 0.202597}, {"exploitation_type": "Unspecified", "gender": "Male", "proportion": 0.397268}, {"exploitation_type": "Combination of Exploitation Types", "gender": "Transgender/NonConforming", "proportion": 0.0}, {"exploitation_type": "Forced Labour", "gender": "Transgender/NonConforming", "proportion": 0.0}, {"exploitation_type": "Forced Marriage", "gender": "Transgender/NonConforming", "proportion": 0.0}, {"exploitation_type": "Other", "gender": "Transgender/NonConforming", "proportion": 0.0}, {"exploitation_type": "Sexual Exploitation", "gender": "Transgender/NonConforming", "proportion": 0.001547}, {"exploitation_type": "Slavery and Similar Practices", "gender": "Transgender/NonConforming", "proportion": 0.0}, {"exploitation_type": "Unspecified", "gender": "Transgender/NonConforming", "proportion": 0.0}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
 </html>
