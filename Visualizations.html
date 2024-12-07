@@ -61,11 +61,18 @@
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .gallery-item img, .gallery-item iframe {
+        .gallery-item img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
             margin-bottom: 10px;
+        }
+
+        .gallery-item iframe {
+            width: 100%;
+            height: 700px; /* Increased height for better visibility */
+            border: none;
+            border-radius: 8px;
         }
 
         .gallery-item.full-width {
@@ -94,6 +101,10 @@
             .gallery-container {
                 grid-template-columns: 1fr;
             }
+
+            .gallery-item iframe {
+                height: 500px; /* Adjusted height for smaller screens */
+            }
         }
     </style>
 </head>
@@ -115,7 +126,7 @@
                 <div class="gallery-item">
                     <img src="means-freq2.png" alt="Means of Control Frequency">
                     <p>Means of Control Frequency: Count vs. Means of Control</p>
-                    <p><strong>Takeaway:</strong> This barchart allows for the Mean of Control that are present within the dataset to
+                    <p><strong>Takeaway:</strong> This barchart allows for the Means of Control that are present within the dataset to
                         be sorted by prevalence. By using a barchart in the manner that we did, it is easy to decipher
                         which Means of Control are more prevalent than others, allowing policymakers and
                         organizations alike to act accordingly.</p>
@@ -124,7 +135,7 @@
                     <img src="exploitation-type.png" alt="Exploitation Type Percentages">
                     <p>Exploitation Type Percentages: Type vs. Percentage</p>
                     <p><strong>Takeaway:</strong> This barchart, which analyzes the percentages of each Exploitation Type within the
-                        dataset, allows for easy interpretation of which Exploitation types are most prevalent., By using
+                        dataset, allows for easy interpretation of which Exploitation types are most prevalent. By using
                         a barchart in the manner that we did, the most prevalent forms of exploitation are able to be
                         deciphered extremely easily, allowing for policymakers and organizations alike to push for
                         necessary reforms.</p>
@@ -140,7 +151,7 @@
                 <div class="gallery-item">
                     <img src="traffic-year.png" alt="Trafficking Incidents by Year">
                     <p>Trafficking Incidents: Years vs. # of Incidents</p>
-                    <p><strong>Takeaway:</strong>This line plot enables us to analyze how trafficking incidents fluctuate over time,
+                    <p><strong>Takeaway:</strong> This line plot enables us to analyze how trafficking incidents fluctuate over time,
                         pinpointing key years with significant increases or decreases. By showing trends over multiple
                         years, this visualization helps identify the impact of policy changes, awareness campaigns, or
                         reporting shifts, providing a historical perspective critical for long-term planning.</p>
@@ -168,36 +179,22 @@
                 <div class="gallery-item">
                     <iframe src="interactive_map_with_clickable_values.html"></iframe>
                     <p>Interactive Map: Clickable Country Data</p>
-                    <p><strong>Takeaway:</strong> The use of spatial regions and color hue is effective for showing geographic
-                        disparities in trafficking. Users can explore specific countries to understand where reporting is
-                        strong or lacking. This tool highlights areas for targeted intervention and international
-                        collaboration.</p>
+                    <p><strong>Takeaway:</strong> The map highlights geographic disparities in trafficking reports, allowing users to explore the data by region. It provides a clear view of where reporting is strong or lacking and emphasizes areas requiring international collaboration.</p>
                 </div>
                 <div class="gallery-item">
                     <iframe src="interactive_trafficking_incidents_by_gender.html"></iframe>
                     <p>Trafficking Incidents by Gender and Year</p>
-                    <p><strong>Takeaway:</strong>The interactive line plot provides a dynamic way to examine temporal trends in
-                        trafficking incidents, filtered by gender. Users can identify spikes or declines in specific years
-                        and compare patterns between genders. This visualization is particularly useful for evaluating
-                        the effectiveness of gender-specific interventions or policies over time.</p>
+                    <p><strong>Takeaway:</strong> This dynamic visualization showcases how trafficking incidents vary over time for different genders. It is particularly helpful for identifying temporal trends and evaluating gender-specific interventions.</p>
                 </div>
                 <div class="gallery-item full-width">
                     <iframe src="interactive_dashboard.html"></iframe>
                     <p>Interactive Stacked Bar Chart with Gender Breakdown</p>
-                    <p><strong>Takeaway:</strong> The stacked bar chart allows us to visualize gender disparities within exploitation
-                        types, with segments showing which gender is most affected by specific forms of trafficking.
-                        This approach makes it easy to compare exploitation types and prioritize interventions for
-                        vulnerable demographics. For example, females dominate sexual exploitation, while males are
-                        more prevalent in forced labor.</p>
+                    <p><strong>Takeaway:</strong> This dashboard provides an intuitive view of gender disparities across various exploitation types. It enables policymakers and researchers to identify which demographics are most vulnerable to specific forms of exploitation.</p>
                 </div>
                 <div class="gallery-item full-width">
                     <iframe src="optimized_interactive_violin_plot.html"></iframe>
                     <p>Interactive Violin Plot - Test</p>
-                    <p><strong>Takeaway:</strong> : The violin plot captures variability and density in the use of control methods,
-                        showing the range and frequency of each method. It’s particularly useful for identifying which
-                        controls are most frequently reported, such as psychological or physical abuse, and comparing
-                        distributions across multiple categories. This helps stakeholders understand the multifaceted
-                        vulnerabilities of trafficking victims.</p>
+                    <p><strong>Takeaway:</strong> The violin plot provides an age-specific distribution of exploitation types, revealing which age groups are most at risk. This insight is crucial for tailoring interventions to vulnerable populations.</p>
                 </div>
             </div>
         </section>
