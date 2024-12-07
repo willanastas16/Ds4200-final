@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizations</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #f55a81;
+            padding: 15px 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .gallery {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background: white;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .gallery-item iframe {
+            width: 100%;
+            height: 700px; /* Increased height for better visibility */
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* Full-width styling for the last two interactive graphs */
+        .gallery-item.full-width {
+            grid-column: 1 / -1; /* Spans entire row */
+        }
+
+        footer {
+            background-color: #264653;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            nav a {
+                font-size: 16px;
+            }
+
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item iframe {
+                height: 500px; /* Adjusted height for smaller screens */
+            }
+        }
+    </style>
+</style>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+</head>
+<body>
+<header>
+    <nav>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="Data.html" class="nav-link">Data</a>
+        <a href="visualizations.html" class="nav-link">Visualizations</a>
+        <a href="references.html" class="nav-link">References</a>
+        <a href="Conclusion.html" class="nav-link">Conclusion</a>
+    </nav>
+</header>
+
+<main>
+    <section class="gallery">
+        <div class="gallery-container">
+            <!-- Static Visualizations -->
+            <div class="gallery-item">
+                <img src="means-freq2.png" alt="Means of Control Frequency">
+                <p>Means of Control Frequency: Count vs. Means of Control</p>
+            </div>
+            <div class="gallery-item">
+                <img src="exploitation-type.png" alt="Percentage of ICU Admissions">
+                <p>Exploitation Type Percentages: Type vs. Percentage</p>
+            </div>
+            <div class="gallery-item">
+                <img src="traffic-gender-year.png" alt="Trafficking Incidents by Year">
+                <p>Trafficking Incidents: Years vs. # of Incidents w/ Global Economic Crises and Awareness Campaigns</p>
+            </div>
+            <div class="gallery-item">
+                <img src="traffic-year.png" alt="Trafficking Incidents by Year">
+                <p>Trafficking Incidents: Years vs. # of Incidents</p>
+            </div>
+            <div class="gallery-item">
+                <img src="type-gender.png" alt="Exploitation Type by Gender">
+                <p>Exploitation Type by Gender: Exploitation Type vs. Percentage</p>
+            </div>
+            <div class="gallery-item">
+                <img src="violin-control.png" alt="Means of Control Violin Plot">
+                <p>Means of Control Violin Plot: Means of Control vs. Percentages</p>
+            </div>
+
+            <!-- Embedded Interactive Visualizations -->
+            <div class="gallery-item">
+                <iframe src="interactive_map_with_clickable_values.html"></iframe>
+                <p>Interactive Map: Clickable Country Data</p>
+            </div>
+            <div class="gallery-item">
+                <iframe src="interactive_trafficking_incidents_by_gender.html"></iframe>
+                <p>Trafficking Incidents by Gender and Year</p>
+            </div>
+            <div class="gallery-item full-width">
+                <iframe src="interative_dashboard.html"></iframe>
+                <p>Interactive Stacked Bar Chart with Gender Breakdown</p>
+            </div>
+            <!-- Interactive Violin Plot: Now dynamically loaded from ZIP -->
+            <div class="gallery-item full-width">
+                <input type="file" id="zip-file" accept=".zip" />
+                <iframe id="interative-iframe" width="100%" height="700px" style="border:none;"></iframe>
+                <p>Interactive Violin Plot</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 DS4200 Final Project | Group: William, Evelyn, Desiree</p>
+</footer>
+
+<script>
+    document.getElementById('zip-file').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+
+        if (file && file.name.endsWith('.zip')) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const zip = new JSZip();
+                zip.loadAsync(e.target.result).then(function(contents) {
+                    const interativeHtml = contents['interative.html']; // Extract the HTML file inside the zip
+                    if (interativeHtml) {
+                        // Create a Blob object from the extracted HTML content
+                        const blob = new Blob([interativeHtml], { type: 'text/html' });
+                        const url = URL.createObjectURL(blob);
+
+                        // Set the iframe's src to the newly created URL
+                        document.getElementById('interative-iframe').src = url;
+                    } else {
+                        alert('No interative.html file found in the ZIP archive.');
+                    }
+                });
+            };
+
+            reader.readAsArrayBuffer(file);
+        } else {
+            alert('Please upload a valid ZIP file.');
+        }
+    });
+</script>
+</body>
+</html>
